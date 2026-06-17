@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reactivation Challenge - Leaderboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: #f2f2f2;
+    min-height: 100vh;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    width: 100%;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ff0000;
+    border-radius: 12px;
+    padding: 10px 20px;
+    gap: 6px;
+  }
+  .logo-badge .line { width: 18px; height: 2.5px; background: #fff; }
+  .logo-badge .logo-text { display: flex; flex-direction: column; }
+  .logo-badge .alpha {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-badge .affiliates {
+    color: #fff;
+    font-size: 8px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .nav a {
+    color: rgba(0,0,0,0.4);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .nav a.active { color: #ff0000; }
+  .page-header {
+    text-align: center;
+    padding: 40px 20px 10px;
+    max-width: 700px;
+  }
+  .page-header h1 {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #000;
+  }
+  .page-header h1 .red { color: #ff0000; }
+  .page-header p {
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+    font-weight: 400;
+  }
+  .updated {
+    font-size: 11px;
+    color: rgba(0,0,0,0.3);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .top3 {
+    display: flex;
+    gap: 16px;
+    margin: 30px 0;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .top-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 16px;
+    padding: 24px 28px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .top-card.first {
+    border-top: 3px solid #ff0000;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .top-card .medal { font-size: 36px; margin-bottom: 8px; }
+  .top-card.first .medal { font-size: 44px; }
+  .top-card .name {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000;
+  }
+  .top-card .metric-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .top-card .metric { text-align: center; }
+  .top-card .metric-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #000;
+  }
+  .top-card.first .metric-value { color: #ff0000; }
+  .top-card .metric-label {
+    font-size: 9px;
+    color: rgba(0,0,0,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 10px 20px 40px;
+  }
+  .table-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+  }
+  thead th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(0,0,0,0.35);
+    font-weight: 800;
+  }
+  thead th:last-child, thead th:nth-child(3), thead th:nth-child(4) {
+    text-align: right;
+  }
+  tbody tr {
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    border-radius: 10px;
+  }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr.top-row { border-left: 3px solid #ff0000; }
+  tbody td {
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+  }
+  tbody td:first-child {
+    font-weight: 800;
+    color: rgba(0,0,0,0.3);
+    width: 50px;
+    text-align: center;
+  }
+  tbody tr.top-row td:first-child { color: #ff0000; }
+  tbody td:nth-child(3), tbody td:nth-child(4), tbody td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .name-cell {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 12px;
+  }
+  .deposits { color: #000; font-weight: 800; }
+  .ngr { color: #ff0000; font-weight: 800; }
+  .change { font-size: 11px; font-weight: 800; }
+  .change.up { color: #16a34a; }
+  .change.down { color: #dc2626; }
+  .change.same { color: rgba(0,0,0,0.25); }
+  .footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-badge">
+      <div class="line"></div>
+      <div class="logo-text">
+        <span class="alpha">ALPHA</span>
+        <span class="affiliates">AFFILIATES</span>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="#">Registration</a>
+      <a href="#" class="active">Leaderboard</a>
+      <a href="#">Rules</a>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <h1>🏆 <span class="red">Leaderboard</span></h1>
+    <p>Player Reactivation Challenge — Top Performers</p>
+    <div class="updated">Last updated: June 17, 2026 09:00 UTC · Google Sheets</div>
+  </div>
+
+  <div class="top3">
+    <div class="top-card">
+      <div class="medal">🥈</div>
+      <div class="name">Dmitry K.</div>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-value">47</div>
+          <div class="metric-label">Deposits</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">$3.1K</div>
+          <div class="metric-label">NGR</div>
+        </div>
+      </div>
+    </div>
+    <div class="top-card first">
+      <div class="medal">🥇</div>
+      <div class="name">Elena S.</div>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-value">63</div>
+          <div class="metric-label">Deposits</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">$4.2K</div>
+          <div class="metric-label">NGR</div>
+        </div>
+      </div>
+    </div>
+    <div class="top-card">
+      <div class="medal">🥉</div>
+      <div class="name">Anna P.</div>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-value">38</div>
+          <div class="metric-label">Deposits</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">$2.5K</div>
+          <div class="metric-label">NGR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div class="table-title">Full Rankings</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Manager</th>
+          <th>Deposits</th>
+          <th>NGR</th>
+          <th>Trend</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="top-row">
+          <td>1</td>
+          <td class="name-cell">Elena S.</td>
+          <td class="deposits">63</td>
+          <td class="ngr">$4,218</td>
+          <td><span class="change up">↑ 2</span></td>
+        </tr>
+        <tr class="top-row">
+          <td>2</td>
+          <td class="name-cell">Dmitry K.</td>
+          <td class="deposits">47</td>
+          <td class="ngr">$3,102</td>
+          <td><span class="change same">—</span></td>
+        </tr>
+        <tr class="top-row">
+          <td>3</td>
+          <td class="name-cell">Anna P.</td>
+          <td class="deposits">38</td>
+          <td class="ngr">$2,540</td>
+          <td><span class="change down">↓ 1</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="name-cell">Sergey M.</td>
+          <td class="deposits">35</td>
+          <td class="ngr">$2,280</td>
+          <td><span class="change up">↑ 1</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="name-cell">Olga V.</td>
+          <td class="deposits">31</td>
+          <td class="ngr">$1,890</td>
+          <td><span class="change down">↓ 2</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="name-cell">Maria T.</td>
+          <td class="deposits">28</td>
+          <td class="ngr">$1,650</td>
+          <td><span class="change up">↑ 3</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="name-cell">Alex R.</td>
+          <td class="deposits">24</td>
+          <td class="ngr">$1,420</td>
+          <td><span class="change same">—</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="name-cell">Ivan L.</td>
+          <td class="deposits">19</td>
+          <td class="ngr">$980</td>
+          <td><span class="change down">↓ 1</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">© 2026 Alpha Affiliates — Data refreshed daily from Google Sheets</div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reactivation Challenge - Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: #f2f2f2;
+    min-height: 100vh;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    width: 100%;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ff0000;
+    border-radius: 12px;
+    padding: 10px 20px;
+    gap: 6px;
+  }
+  .logo-badge .line { width: 18px; height: 2.5px; background: #fff; }
+  .logo-badge .logo-text { display: flex; flex-direction: column; }
+  .logo-badge .alpha {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-badge .affiliates {
+    color: #fff;
+    font-size: 8px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .nav a {
+    color: rgba(0,0,0,0.4);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .nav a:hover { color: #ff0000; }
+  .nav a.active { color: #ff0000; }
+  .hero {
+    text-align: center;
+    padding: 50px 20px 20px;
+    max-width: 700px;
+  }
+  .badge {
+    display: inline-block;
+    background: #ff0000;
+    color: #fff;
+    padding: 8px 24px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #000;
+  }
+  .hero h1 .red { color: #ff0000; }
+  .hero p {
+    font-size: 15px;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 30px 0 40px;
+  }
+  .stat { text-align: center; }
+  .stat-value {
+    font-size: 36px;
+    font-weight: 800;
+    color: #000;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(0,0,0,0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .stat-divider {
+    width: 1px;
+    background: rgba(0,0,0,0.12);
+    align-self: stretch;
+  }
+  .form-card {
+    background: #fff;
+    border: none;
+    border-top: 3px solid #ff0000;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 440px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .form-card h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+  }
+  .form-card .subtitle {
+    font-size: 13px;
+    color: rgba(0,0,0,0.45);
+    text-align: center;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .field input {
+    width: 100%;
+    padding: 14px 16px;
+    background: #f2f2f2;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    color: #000;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus { border-color: #ff0000; }
+  .field input::placeholder { color: rgba(0,0,0,0.3); }
+  .btn {
+    width: 100%;
+    padding: 16px;
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: #ff1400; }
+  .prizes {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+  .prize {
+    background: #f2f2f2;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+    flex: 1;
+  }
+  .prize.first { border-color: #ff0000; background: #ff0000; border-radius: 12px; }
+  .prize .place { font-size: 24px; margin-bottom: 4px; }
+  .prize .amount {
+    font-size: 20px;
+    font-weight: 800;
+    color: #000;
+  }
+  .prize.first .amount { color: #fff; }
+  .prize .label {
+    font-size: 10px;
+    color: rgba(0,0,0,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+  .prize.first .label { color: rgba(255,255,255,0.5); }
+  .footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-badge">
+      <div class="line"></div>
+      <div class="logo-text">
+        <span class="alpha">ALPHA</span>
+        <span class="affiliates">AFFILIATES</span>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="#" class="active">Registration</a>
+      <a href="#">Leaderboard</a>
+      <a href="#">Rules</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="badge">🔥 Internal Competition</div>
+    <h1>Player <span class="red">Reactivation</span> Challenge</h1>
+    <p>Compete with your team to reactivate the most players. Track your deposits and NGR — top performers win prizes!</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-value">14</div>
+      <div class="stat-label">Days Left</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-value">23</div>
+      <div class="stat-label">Participants</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-value">$12.4K</div>
+      <div class="stat-label">Total NGR</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h2>Join the Challenge</h2>
+    <div class="subtitle">Register to participate and track your progress</div>
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" placeholder="e.g. Maria Ivanova">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" placeholder="your@alphaaffiliates.com">
+    </div>
+    <button class="btn">Register Now →</button>
+    <div class="prizes">
+      <div class="prize first">
+        <div class="place">🥇</div>
+        <div class="amount">$500</div>
+        <div class="label">1st Place</div>
+      </div>
+      <div class="prize">
+        <div class="place">🥈</div>
+        <div class="amount">$300</div>
+        <div class="label">2nd Place</div>
+      </div>
+      <div class="prize">
+        <div class="place">🥉</div>
+        <div class="amount">$150</div>
+        <div class="label">3rd Place</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">© 2026 Alpha Affiliates — Internal Use Only</div>
+</body>
+</html>
