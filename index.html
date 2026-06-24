@@ -118,7 +118,7 @@
   }
   .prize.first { border-color: #ff0000; background: #ff0000; }
   .prize .place { font-size: 24px; margin-bottom: 4px; }
-  .prize .amount { font-size: 20px; font-weight: 800; color: #000; }
+  .prize .amount { font-size: 13px; font-weight: 800; color: #000; }
   .prize.first .amount { color: #fff; }
   .prize .label {
     font-size: 10px; color: rgba(0,0,0,0.4); text-transform: uppercase;
@@ -153,6 +153,7 @@
     <div class="nav">
       <a href="index.html" class="active">Registration</a>
       <a href="leaderboard.html">Leaderboard</a>
+      <a href="prizes.html">Prizes</a>
       <a href="rules.html">Rules</a>
     </div>
   </div>
@@ -194,21 +195,21 @@
         <input type="email" id="reg-email" placeholder="your@alpha-affiliates.com">
       </div>
       <button class="btn" id="reg-btn" onclick="submitRegistration()">Register Now →</button>
-      <div class="prizes">
+      <div class="prizes" onclick="window.location.href='prizes.html'" style="cursor:pointer;">
         <div class="prize first">
           <div class="place">🥇</div>
-          <div class="amount">$500</div>
-          <div class="label">1st Place</div>
+          <div class="amount">PS5, iPad, AirPods Max...</div>
+          <div class="label">1st Place →</div>
         </div>
         <div class="prize">
           <div class="place">🥈</div>
-          <div class="amount">$300</div>
-          <div class="label">2nd Place</div>
+          <div class="amount">AirPods Pro, Watch SE...</div>
+          <div class="label">2nd Place →</div>
         </div>
         <div class="prize">
           <div class="place">🥉</div>
-          <div class="amount">$150</div>
-          <div class="label">3rd Place</div>
+          <div class="amount">Merch, Keyboard, SPA...</div>
+          <div class="label">3rd Place →</div>
         </div>
       </div>
     </div>

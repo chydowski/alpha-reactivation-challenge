@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reactivation Challenge - Prizes</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Druk Wide';
+    src: url('DrukWide-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: #f2f2f2;
+    min-height: 100vh;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    width: 100%;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ff0000;
+    border-radius: 12px;
+    padding: 10px 20px;
+    gap: 6px;
+  }
+  .logo-badge .line { width: 18px; height: 2.5px; background: #fff; }
+  .logo-badge .logo-text { display: flex; flex-direction: column; }
+  .logo-badge .alpha {
+    color: #fff; font-size: 18px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase; line-height: 1;
+  }
+  .logo-badge .affiliates {
+    color: #fff; font-size: 8px; letter-spacing: 3px;
+    font-weight: 600; text-transform: uppercase;
+  }
+  .nav a {
+    color: rgba(0,0,0,0.4); text-decoration: none; margin-left: 24px;
+    font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .nav a:hover { color: #ff0000; }
+  .nav a.active { color: #ff0000; }
+  .page-header { text-align: center; padding: 40px 20px 10px; max-width: 700px; }
+  .page-header h1 {
+    font-family: 'Druk Wide', 'Bebas Neue', Impact, sans-serif;
+    font-size: 50px; font-weight: 400; margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 4px; color: #000;
+  }
+  .page-header h1 .red { color: #ff0000; }
+  .page-header p { font-size: 14px; color: rgba(0,0,0,0.5); font-weight: 400; }
+
+  .prizes-container {
+    width: 100%; max-width: 1000px; margin: 30px 20px 40px;
+    display: flex; flex-direction: column; gap: 32px;
+  }
+
+  .prize-tier {
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .prize-tier-header {
+    padding: 24px 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .prize-tier.first .prize-tier-header { background: #ff0000; }
+  .prize-tier.second .prize-tier-header { background: #222; }
+  .prize-tier.third .prize-tier-header { background: #444; }
+  .prize-tier.extra .prize-tier-header { background: linear-gradient(135deg, #ff0000, #222); }
+
+  .prize-tier-header .medal { font-size: 40px; }
+  .prize-tier-header .tier-info { flex: 1; }
+  .prize-tier-header .tier-title {
+    font-family: 'Druk Wide', 'Bebas Neue', Impact, sans-serif;
+    font-size: 28px; color: #fff; text-transform: uppercase;
+    letter-spacing: 3px; line-height: 1;
+  }
+  .prize-tier-header .tier-subtitle {
+    font-size: 11px; color: rgba(255,255,255,0.6);
+    text-transform: uppercase; letter-spacing: 2px;
+    font-weight: 600; margin-top: 4px;
+  }
+  .prize-tier-header .tier-value {
+    font-family: 'Druk Wide', 'Bebas Neue', Impact, sans-serif;
+    font-size: 36px; color: #fff;
+  }
+
+  .prize-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 24px;
+  }
+
+  .prize-item {
+    background: #f8f8f8;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .prize-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .prize-item .prize-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .prize-item .prize-name {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #222;
+    line-height: 1.4;
+  }
+  .prize-item .prize-note {
+    font-size: 10px;
+    color: rgba(0,0,0,0.4);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .prize-tier.first .prize-item { border-bottom: 2px solid #ff0000; }
+  .prize-tier.second .prize-item { border-bottom: 2px solid #222; }
+  .prize-tier.third .prize-item { border-bottom: 2px solid #444; }
+
+  .extra-info {
+    padding: 24px 32px;
+    text-align: center;
+  }
+  .extra-formula {
+    background: #f8f8f8;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    display: inline-block;
+  }
+  .extra-formula .formula-text {
+    font-size: 14px; color: #222; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .extra-formula .formula-highlight {
+    color: #ff0000; font-weight: 800; font-size: 18px;
+  }
+  .extra-formula .formula-note {
+    font-size: 11px; color: rgba(0,0,0,0.4); margin-top: 8px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .cta-section {
+    text-align: center; padding: 20px 0 40px;
+  }
+  .cta-section a {
+    display: inline-block; background: #ff0000; color: #fff;
+    padding: 16px 48px; border-radius: 10px; font-size: 14px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .cta-section a:hover { background: #ff1400; }
+
+  .footer {
+    margin-top: auto; padding: 20px; text-align: center;
+    font-size: 11px; color: rgba(0,0,0,0.3); letter-spacing: 1px; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-badge">
+      <div class="line"></div>
+      <div class="logo-text">
+        <span class="alpha">ALPHA</span>
+        <span class="affiliates">AFFILIATES</span>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Registration</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="prizes.html" class="active">Prizes</a>
+      <a href="rules.html">Rules</a>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <h1>🎁 <span class="red">Prizes</span></h1>
+    <p>Player Reactivation Challenge — What You Can Win</p>
+  </div>
+
+  <div class="prizes-container">
+
+    <div class="prize-tier first">
+      <div class="prize-tier-header">
+        <div class="medal">🥇</div>
+        <div class="tier-info">
+          <div class="tier-title">1st Place</div>
+          <div class="tier-subtitle">Choose any prize from the list</div>
+        </div>
+      </div>
+      <div class="prize-grid">
+        <div class="prize-item">
+          <span class="prize-icon">🎮</span>
+          <div class="prize-name">PlayStation 5</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">⌚</span>
+          <div class="prize-name">Apple Watch Series 11</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">💇</span>
+          <div class="prize-name">Dyson AirWrap</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">📱</span>
+          <div class="prize-name">iPad Air</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🎧</span>
+          <div class="prize-name">AirPods Max 2</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">📷</span>
+          <div class="prize-name">GoPro HERO12 Black</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🤖</span>
+          <div class="prize-name">Robot Vacuum</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🖥️</span>
+          <div class="prize-name">Premium Monitor</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🛒</span>
+          <div class="prize-name">Amazon Gift Card</div>
+          <div class="prize-note">€500</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prize-tier second">
+      <div class="prize-tier-header">
+        <div class="medal">🥈</div>
+        <div class="tier-info">
+          <div class="tier-title">2nd Place</div>
+          <div class="tier-subtitle">Choose any prize from the list</div>
+        </div>
+      </div>
+      <div class="prize-grid">
+        <div class="prize-item">
+          <span class="prize-icon">🎧</span>
+          <div class="prize-name">AirPods Pro</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">⌚</span>
+          <div class="prize-name">Apple Watch SE</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">⌚</span>
+          <div class="prize-name">Samsung Galaxy Watch</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🖥️</span>
+          <div class="prize-name">Monitor</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🪑</span>
+          <div class="prize-name">Ergonomic Office Chair</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🤖</span>
+          <div class="prize-name">Robot Vacuum</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🍳</span>
+          <div class="prize-name">Air Fryer</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🏋️</span>
+          <div class="prize-name">Gym Membership</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">📚</span>
+          <div class="prize-name">E-Reader + Subscription</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🎵</span>
+          <div class="prize-name">Vinyl Record Player</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🛒</span>
+          <div class="prize-name">Amazon Gift Card</div>
+          <div class="prize-note">€300</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prize-tier third">
+      <div class="prize-tier-header">
+        <div class="medal">🥉</div>
+        <div class="tier-info">
+          <div class="tier-title">3rd Place</div>
+          <div class="tier-subtitle">Choose any prize from the list</div>
+        </div>
+      </div>
+      <div class="prize-grid">
+        <div class="prize-item">
+          <span class="prize-icon">👕</span>
+          <div class="prize-name">Alpha Affiliates Merch</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🪑</span>
+          <div class="prize-name">Office Chair</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">⌨️</span>
+          <div class="prize-name">Mechanical Keyboard</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">💆</span>
+          <div class="prize-name">SPA Certificate</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🏋️</span>
+          <div class="prize-name">Gym Membership</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🤖</span>
+          <div class="prize-name">ChatGPT Plus</div>
+          <div class="prize-note">6 months</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🛒</span>
+          <div class="prize-name">Amazon Gift Card</div>
+          <div class="prize-note">€150</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🎓</span>
+          <div class="prize-name">Online Course</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🔊</span>
+          <div class="prize-name">Portable Speaker</div>
+        </div>
+        <div class="prize-item">
+          <span class="prize-icon">🔋</span>
+          <div class="prize-name">Power Bank</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prize-tier extra">
+      <div class="prize-tier-header">
+        <div class="medal">⭐</div>
+        <div class="tier-info">
+          <div class="tier-title">Extra Prize</div>
+          <div class="tier-subtitle">For places 4–10</div>
+        </div>
+      </div>
+      <div class="extra-info">
+        <div class="extra-formula">
+          <div class="formula-text">
+            Every <span class="formula-highlight">€1,000</span> Reactivated NGR = <span class="formula-highlight">1 Kudos</span>
+          </div>
+          <div class="formula-note">Available for participants who finish 4th through 10th</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-section">
+    <a href="index.html">Register Now →</a>
+  </div>
+
+  <div class="footer">© 2026 Alpha Affiliates — Internal Use Only</div>
+</body>
+</html>
