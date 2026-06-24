@@ -134,6 +134,18 @@
     text-align: center; padding: 60px 20px; color: rgba(0,0,0,0.4);
   }
   .no-data h3 { font-size: 18px; margin-bottom: 8px; color: #222; }
+  .totals-row {
+    display: flex; justify-content: center; gap: 40px;
+    margin: 20px 0 10px; padding: 20px 40px;
+    background: #fff; border-radius: 14px; border-top: 3px solid #ff0000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04); max-width: 900px; width: 100%;
+  }
+  .totals-row .total-item { text-align: center; }
+  .totals-row .total-value { font-size: 28px; font-weight: 800; color: #ff0000; }
+  .totals-row .total-label {
+    font-size: 9px; font-weight: 700; color: rgba(0,0,0,0.4);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;
+  }
 </style>
 </head>
 <body>
@@ -156,6 +168,8 @@
     <p>Player Reactivation Challenge — Top Performers</p>
     <div class="updated" id="updated-time">Loading data from Google Sheets...</div>
   </div>
+
+  <div id="totals-container" class="totals-row" style="display:none;"></div>
 
   <div id="top3-container" class="top3" style="display:none;"></div>
 
@@ -257,6 +271,34 @@ function renderTable(data) {
   tbody.innerHTML = html;
 }
 
+function renderTotals(data) {
+  let totalDeposits = 0, totalNGR = 0, totalReactivated = 0;
+  data.forEach(r => {
+    totalDeposits += parseFloat(r.Deposits || r.deposits || 0);
+    totalNGR += parseFloat(r.NGR || r.ngr || 0);
+    totalReactivated += parseInt(r['Reactivated Players'] || r.reactivated || 0);
+  });
+  const container = document.getElementById('totals-container');
+  container.innerHTML = `
+    <div class="total-item">
+      <div class="total-value">${data.length}</div>
+      <div class="total-label">Managers</div>
+    </div>
+    <div class="total-item">
+      <div class="total-value">${formatMoney(totalDeposits)}</div>
+      <div class="total-label">Total Deposits</div>
+    </div>
+    <div class="total-item">
+      <div class="total-value">${formatMoney(totalNGR)}</div>
+      <div class="total-label">Total NGR</div>
+    </div>
+    <div class="total-item">
+      <div class="total-value">${totalReactivated}</div>
+      <div class="total-label">Total Reactivated</div>
+    </div>`;
+  container.style.display = 'flex';
+}
+
 async function loadLeaderboard() {
   try {
     const resp = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`);
@@ -273,6 +315,7 @@ async function loadLeaderboard() {
 
     data.sort((a, b) => (parseFloat(b.NGR || b.ngr || 0)) - (parseFloat(a.NGR || a.ngr || 0)));
 
+    renderTotals(data);
     renderTop3(data);
     renderTable(data);
     document.getElementById('rankings-table').style.display = 'table';
