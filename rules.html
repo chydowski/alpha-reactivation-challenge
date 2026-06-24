@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reactivation Challenge - Rules</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: #f2f2f2;
+    min-height: 100vh;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    width: 100%;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ff0000;
+    border-radius: 12px;
+    padding: 10px 20px;
+    gap: 6px;
+  }
+  .logo-badge .line { width: 18px; height: 2.5px; background: #fff; }
+  .logo-badge .logo-text { display: flex; flex-direction: column; }
+  .logo-badge .alpha {
+    color: #fff; font-size: 18px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase; line-height: 1;
+  }
+  .logo-badge .affiliates {
+    color: #fff; font-size: 8px; letter-spacing: 3px;
+    font-weight: 600; text-transform: uppercase;
+  }
+  .nav a {
+    color: rgba(0,0,0,0.4); text-decoration: none; margin-left: 24px;
+    font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .nav a:hover { color: #ff0000; }
+  .nav a.active { color: #ff0000; }
+  .page-header { text-align: center; padding: 40px 20px 10px; max-width: 700px; }
+  .page-header h1 {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 50px; font-weight: 400; margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 4px; color: #000;
+  }
+  .page-header h1 .red { color: #ff0000; }
+  .page-header p { font-size: 14px; color: rgba(0,0,0,0.5); font-weight: 400; }
+  .rules-container {
+    width: 100%; max-width: 800px; margin: 30px 20px 40px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .rule-card {
+    background: #fff; border-radius: 14px; padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .rule-card.warning {
+    border-left: 4px solid #ff0000;
+  }
+  .rule-card.special {
+    border-left: 4px solid #222;
+  }
+  .rule-card h2 {
+    font-size: 14px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.5px; color: #ff0000; margin-bottom: 16px;
+  }
+  .rule-card.special h2 { color: #222; }
+  .rule-card h3 {
+    font-size: 12px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1px; color: #222; margin: 16px 0 8px;
+  }
+  .rule-card ul {
+    list-style: none; padding: 0;
+  }
+  .rule-card ul li {
+    font-size: 13px; line-height: 1.7; color: #444;
+    padding-left: 20px; position: relative; margin-bottom: 4px;
+  }
+  .rule-card ul li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; background: #ff0000; border-radius: 50%;
+  }
+  .rule-card ul li.negative::before { background: #dc2626; }
+  .rule-card ul li.positive::before { background: #16a34a; }
+  .rule-card ul li.neutral::before { background: #888; }
+  .rule-card p {
+    font-size: 13px; line-height: 1.7; color: #444;
+  }
+  .rule-card .highlight {
+    background: #f2f2f2; border-radius: 8px; padding: 12px 16px;
+    margin-top: 12px; font-size: 12px; color: #222; font-weight: 600;
+  }
+  .rule-card .penalty {
+    background: #fff0f0; border-radius: 8px; padding: 12px 16px;
+    margin-top: 12px; font-size: 12px; color: #dc2626; font-weight: 600;
+  }
+  .rule-card .tag-example {
+    background: #222; color: #fff; display: inline-block;
+    padding: 4px 12px; border-radius: 6px; font-size: 12px;
+    font-family: monospace; font-weight: 600; margin-top: 4px;
+  }
+  .entry-fee {
+    display: inline-block; background: #ff0000; color: #fff;
+    padding: 8px 20px; border-radius: 8px; font-size: 13px;
+    font-weight: 800; letter-spacing: 1px;
+  }
+  .footer {
+    margin-top: auto; padding: 20px; text-align: center;
+    font-size: 11px; color: rgba(0,0,0,0.3); letter-spacing: 1px; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-badge">
+      <div class="line"></div>
+      <div class="logo-text">
+        <span class="alpha">ALPHA</span>
+        <span class="affiliates">AFFILIATES</span>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">Registration</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="rules.html" class="active">Rules</a>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <h1>📋 Challenge <span class="red">Rules</span></h1>
+    <p>Player Reactivation Challenge — Official Rules & Guidelines</p>
+  </div>
+
+  <div class="rules-container">
+
+    <div class="rule-card">
+      <h2>📅 Duration & Entry</h2>
+      <ul>
+        <li>Challenge period: <strong>July 1 – July 31, 2026</strong></li>
+        <li>Each participant receives an approximately equal base of players for reactivation</li>
+        <li>A single player can be reactivated <strong>no more than once every 5 days</strong></li>
+      </ul>
+      <div class="highlight">
+        Entry fee: <span class="entry-fee">10 Kudos</span>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h2>🎯 NGR Target</h2>
+      <ul>
+        <li>The combined NGR from all reactivations must reach a minimum of <strong>100,000 NGR</strong></li>
+        <li class="negative">If the total NGR is below the target — <strong>all challenge results are voided</strong></li>
+      </ul>
+    </div>
+
+    <div class="rule-card warning">
+      <h2>🚫 Do Not Reactivate</h2>
+      <ul>
+        <li class="negative"><strong>Negative-balance players</strong></li>
+        <li class="negative"><strong>Players with a high bonus rate</strong></li>
+      </ul>
+      <div class="penalty">
+        ⚠️ Penalty: −5,000 NGR deducted for reactivating such a player
+      </div>
+      <h3>Exception</h3>
+      <ul>
+        <li class="positive">Players with <strong>1–2 deposits under a welcome bonus</strong> are allowed</li>
+      </ul>
+    </div>
+
+    <div class="rule-card warning">
+      <h2>⚡ Activity & Conduct</h2>
+      <ul>
+        <li class="negative">If a manager does not begin reactivation work within the <strong>first week</strong>, their player base is seized and redistributed among active participants</li>
+        <li class="negative">Using <strong>inadequate or abusive offers</strong> results in automatic disqualification from the challenge</li>
+      </ul>
+    </div>
+
+    <div class="rule-card special">
+      <h2>🎰 Special Case — Big Win</h2>
+      <p>If a manager successfully reactivates a qualifying player who then hits a <strong>big win</strong>, only <strong>50% of that player's deposit amount</strong> is counted toward the manager's result.</p>
+    </div>
+
+    <div class="rule-card">
+      <h2>📊 Scoring Methodology</h2>
+
+      <h3>Player Tagging</h3>
+      <p>Each manager must tag their reactivated players with:</p>
+      <div class="tag-example">react_vip_[your_nickname]</div>
+
+      <h3>Record Keeping</h3>
+      <ul>
+        <li>All reactivated players are logged in a <strong>dedicated sheet</strong> under each manager's tab</li>
+      </ul>
+
+      <h3>Quality Review</h3>
+      <ul>
+        <li>The <strong>Quality team</strong> verifies that each player was genuinely reactivated by the claiming manager</li>
+        <li>Players who were already active without the manager's involvement are <strong>not counted</strong></li>
+      </ul>
+    </div>
+
+    <div class="rule-card">
+      <h2>🏆 Final Results</h2>
+      <ul>
+        <li>Results are calculated based on <strong>NGR data from Holistics</strong></li>
+        <li>After the challenge ends, a <strong>2-day review period</strong> is provided for:
+          <ul style="margin-top:6px; margin-left:10px;">
+            <li class="neutral">Correcting potential errors</li>
+            <li class="neutral">Reviewing participant appeals</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="rule-card" style="text-align:center; padding: 40px;">
+      <h2 style="margin-bottom: 20px;">Ready to Compete?</h2>
+      <a href="index.html" style="display:inline-block; background:#ff0000; color:#fff; padding:14px 40px; border-radius:10px; font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:2px; text-decoration:none;">Register Now →</a>
+    </div>
+
+  </div>
+
+  <div class="footer">© 2026 Alpha Affiliates — Internal Use Only</div>
+</body>
+</html>
