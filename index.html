@@ -289,6 +289,20 @@ async function loadStats() {
     } else {
       document.getElementById('total-ngr').textContent = '$' + totalNGR;
     }
+
+    const session = sessionStorage.getItem('aa_auth');
+    if (session) {
+      const user = JSON.parse(session);
+      const alreadyRegistered = data.some(r =>
+        (r.Email || r.email || '').toLowerCase() === user.email.toLowerCase()
+      );
+      if (alreadyRegistered) {
+        window.location.href = 'leaderboard.html';
+        return;
+      }
+      document.getElementById('reg-name').value = user.name || '';
+      document.getElementById('reg-email').value = user.email || '';
+    }
   } catch(e) {
     document.getElementById('participants').textContent = '—';
     document.getElementById('total-ngr').textContent = '—';
