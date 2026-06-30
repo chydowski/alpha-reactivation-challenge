@@ -6,6 +6,8 @@
 <title>Reactivation Challenge - Leaderboard</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="auth.js"></script>
 <style>
   @font-face {
     font-family: 'Druk Wide';
@@ -143,9 +145,41 @@
     font-size: 9px; font-weight: 700; color: rgba(0,0,0,0.4);
     text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;
   }
+  #auth-overlay {
+    display: flex; position: fixed; inset: 0; z-index: 9999;
+    background: #f2f2f2; align-items: center; justify-content: center;
+    flex-direction: column; font-family: 'Montserrat', sans-serif;
+  }
+  .auth-card {
+    background: #fff; border-radius: 16px; padding: 48px 40px;
+    text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border-top: 3px solid #ff0000; max-width: 400px; width: 90%;
+  }
+  .auth-card h2 {
+    font-size: 18px; font-weight: 800; margin: 20px 0 8px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .auth-card p {
+    font-size: 13px; color: rgba(0,0,0,0.45); margin-bottom: 28px;
+  }
+  #auth-error {
+    display: none; color: #ff0000; font-size: 12px; font-weight: 600;
+    margin-top: 16px;
+  }
+  #g-signin-btn { display: flex; justify-content: center; }
 </style>
 </head>
 <body>
+  <div id="auth-overlay">
+    <div class="auth-card">
+      <svg width="259" height="82" viewBox="0 0 259 82" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:auto;"><rect y="0.0625" width="258.609" height="81.9355" rx="40.9678" fill="#FF0000"/><mask id="mask_login" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="255" height="82"><rect y="0.0625" width="254.128" height="81.9355" rx="40.9678" fill="white"/></mask><g mask="url(#mask_login)"><path fill-rule="evenodd" clip-rule="evenodd" d="M79.5724 43.705L72.6431 43.705L63.9863 26.3702H58.194L49.5435 43.705H42.6143L54.1609 20.5686H68.0194L79.5724 43.705ZM82.8776 20.5686V43.705L108.086 43.705V37.9161L88.6509 37.9161V20.5686H82.8776ZM119.858 26.3511L125.631 20.5686L144.342 20.5686V33.3105L138.569 38.9785H119.858V43.705H114.085V20.5686H119.858V26.3511ZM119.858 26.3511V33.3105H138.569V26.3511H119.858ZM173.429 20.5686V33.3105L156.109 33.3105V20.5686H150.336V43.705H156.109V38.9785L173.429 38.9785V43.705H179.202V20.5686H173.429ZM220.228 43.705H213.299L210.942 38.9785H192.562L190.205 43.705L183.276 43.705L194.823 20.5686L208.681 20.5686L220.228 43.705ZM198.856 26.3702L195.388 33.3105H195.394H208.116L204.648 26.3702H198.856Z" fill="white"/><path d="M-12.1611 32.6511L71.0546 32.6511V39.0523L-12.1611 39.038L-12.1611 32.6511Z" fill="white"/><path d="M57.6773 61.3858H61.1378L55.3682 49.8313H48.4472L42.6807 61.3858H46.1412L47.3211 59.0222H56.4942L57.6741 61.3858H57.6773ZM48.739 56.1852L50.493 52.6683H53.3255L55.0795 56.1852H48.7358H48.739Z" fill="white"/><path d="M130.21 61.3858H133.671L127.904 49.8313H120.983L115.217 61.3858H118.677L119.857 59.0222H129.03L130.21 61.3858ZM121.272 56.1852L123.026 52.6683H125.858L127.613 56.1852H121.269H121.272Z" fill="white"/><path d="M96.1514 49.8313V61.3858H108.3V58.5266H99.0695V49.8313H96.1514Z" fill="white"/><path d="M146.303 49.8313H132.004V52.7287H137.716V61.3858H140.59V52.7287H146.303V49.8313Z" fill="white"/><path d="M93.7214 49.8313H90.8477V61.3858H93.7214V49.8313Z" fill="white"/><path d="M113.593 49.8313H110.72V61.3858H113.593V49.8313Z" fill="white"/><path d="M74.3733 52.7269V49.8486H62.5264V61.3841H65.4001V57.019H73.1077V54.1915H65.4001V52.7269H74.3733Z" fill="white"/><path d="M88.5335 52.7269V49.8486H76.6865V61.3841H79.5602V57.019H87.2679V54.1915H79.5602V52.7269H88.5335Z" fill="white"/><path d="M179.234 58.5266V54.1678H167.641V52.7255H179.234V49.8313H167.641L164.771 52.7287V57.0429H176.364V58.5266H164.771V61.3636H176.364L179.234 58.5266Z" fill="white"/><path d="M151.929 57.0244H158.27V54.1969H151.929V52.7323V49.835H149.056V61.3895H151.929H162.073V58.5302H151.929V57.0244Z" fill="white"/><path d="M154.813 49.835L151.933 52.7323H162.073V49.835H154.813Z" fill="white"/></g></svg>
+      <h2>Sign In Required</h2>
+      <p>Use your @alpha-affiliates.com Google account to access the dashboard</p>
+      <div id="g-signin-btn"></div>
+      <div id="auth-error"></div>
+    </div>
+  </div>
+  <div id="app-content" style="display:none;width:100%;flex-direction:column;align-items:center;min-height:100vh;">
   <div class="header">
     <div class="logo-badge">
       <svg width="259" height="82" viewBox="0 0 259 82" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="0.0625" width="258.609" height="81.9355" rx="40.9678" fill="#FF0000"/><mask id="mask0_919_9879" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="255" height="82"><rect y="0.0625" width="254.128" height="81.9355" rx="40.9678" fill="white"/></mask><g mask="url(#mask0_919_9879)"><path fill-rule="evenodd" clip-rule="evenodd" d="M79.5724 43.705L72.6431 43.705L63.9863 26.3702H58.194L49.5435 43.705H42.6143L54.1609 20.5686H68.0194L79.5724 43.705ZM82.8776 20.5686V43.705L108.086 43.705V37.9161L88.6509 37.9161V20.5686H82.8776ZM119.858 26.3511L125.631 20.5686L144.342 20.5686V33.3105L138.569 38.9785H119.858V43.705H114.085V20.5686H119.858V26.3511ZM119.858 26.3511V33.3105H138.569V26.3511H119.858ZM173.429 20.5686V33.3105L156.109 33.3105V20.5686H150.336V43.705H156.109V38.9785L173.429 38.9785V43.705H179.202V20.5686H173.429ZM220.228 43.705H213.299L210.942 38.9785H192.562L190.205 43.705L183.276 43.705L194.823 20.5686L208.681 20.5686L220.228 43.705ZM198.856 26.3702L195.388 33.3105H195.394H208.116L204.648 26.3702H198.856Z" fill="white"/><path d="M-12.1611 32.6511L71.0546 32.6511V39.0523L-12.1611 39.038L-12.1611 32.6511Z" fill="white"/><path d="M57.6773 61.3858H61.1378L55.3682 49.8313H48.4472L42.6807 61.3858H46.1412L47.3211 59.0222H56.4942L57.6741 61.3858H57.6773ZM48.739 56.1852L50.493 52.6683H53.3255L55.0795 56.1852H48.7358H48.739Z" fill="white"/><path d="M130.21 61.3858H133.671L127.904 49.8313H120.983L115.217 61.3858H118.677L119.857 59.0222H129.03L130.21 61.3858ZM121.272 56.1852L123.026 52.6683H125.858L127.613 56.1852H121.269H121.272Z" fill="white"/><path d="M96.1514 49.8313V61.3858H108.3V58.5266H99.0695V49.8313H96.1514Z" fill="white"/><path d="M146.303 49.8313H132.004V52.7287H137.716V61.3858H140.59V52.7287H146.303V49.8313Z" fill="white"/><path d="M93.7214 49.8313H90.8477V61.3858H93.7214V49.8313Z" fill="white"/><path d="M113.593 49.8313H110.72V61.3858H113.593V49.8313Z" fill="white"/><path d="M74.3733 52.7269V49.8486H62.5264V61.3841H65.4001V57.019H73.1077V54.1915H65.4001V52.7269H74.3733Z" fill="white"/><path d="M88.5335 52.7269V49.8486H76.6865V61.3841H79.5602V57.019H87.2679V54.1915H79.5602V52.7269H88.5335Z" fill="white"/><path d="M179.234 58.5266V54.1678H167.641V52.7255H179.234V49.8313H167.641L164.771 52.7287V57.0429H176.364V58.5266H164.771V61.3636H176.364L179.234 58.5266Z" fill="white"/><path d="M151.929 57.0244H158.27V54.1969H151.929V52.7323V49.835H149.056V61.3895H151.929H162.073V58.5302H151.929V57.0244Z" fill="white"/><path d="M154.813 49.835L151.933 52.7323H162.073V49.835H154.813Z" fill="white"/></g></svg>
@@ -155,6 +189,7 @@
       <a href="leaderboard.html" class="active">Leaderboard</a>
       <a href="prizes.html">Prizes</a>
       <a href="rules.html">Rules</a>
+      <span id="user-info" style="margin-left:16px;"></span>
     </div>
   </div>
 
@@ -324,6 +359,8 @@ async function loadLeaderboard() {
 }
 
 loadLeaderboard();
+window.onload = function() { if (typeof initGoogleAuth === 'function') initGoogleAuth(); };
 </script>
+  </div>
 </body>
 </html>
